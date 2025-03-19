@@ -22,8 +22,11 @@ jobs:
     - name: Install dependencies
       run: go mod tidy
 
+    - name: Build
+      run: go build -buildvcs=false -o my_app
+
     - name: Run
-      run: go run main.go
+      run: ./my-app
         
     - name: Test
       run: go test -run ^TestApp$ ./tests
