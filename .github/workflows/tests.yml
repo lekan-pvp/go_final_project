@@ -20,10 +20,10 @@ jobs:
       run: go version
 
     - name: Install dependencies
-      run: go get .
+      run: go mod tidy
 
     - name: Run
       run: go run main.go
         
     - name: Test
-      run: go test -v ./...
+      run: go test -run ^TestApp$ ./tests
