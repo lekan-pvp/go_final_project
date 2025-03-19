@@ -24,9 +24,6 @@ jobs:
 
     - name: Build
       run: go build -buildvcs=false -o my_app
-
-    - name: Run
-      run: ./my_app
         
     - name: Test
       run: go test -run ^TestApp$ ./tests
