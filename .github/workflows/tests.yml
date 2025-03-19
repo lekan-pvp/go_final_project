@@ -30,7 +30,7 @@ jobs:
 
     - name: Run local server
       run: |
-        go run main.go
+        go run main.go &
         sleep 5
         go test -run ^TestApp$ ./tests
         
