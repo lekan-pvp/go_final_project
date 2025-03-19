@@ -1,0 +1,14 @@
+FROM golang:1.21
+
+WORKDIR /usr/src/scheduler
+
+COPY go.mod go.sum ./
+RUN go mod download
+# RUN go mod verify
+
+COPY . .
+RUN go build -v -o /usr/local/bin/scheduler
+COPY ./web /usr/local/bin/
+
+WORKDIR /usr/local/bin/
+CMD ["scheduler"]

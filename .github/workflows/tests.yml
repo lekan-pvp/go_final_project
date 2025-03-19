@@ -21,6 +21,9 @@ jobs:
 
     - name: Install dependencies
       run: go get .
+
+    - name: Run
+      run: go run main.go
         
     - name: Test
       run: go test -v ./...
