@@ -8,6 +8,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 5
     steps:
     - uses: actions/checkout@v4
 
@@ -22,8 +25,9 @@ jobs:
     - name: Install dependencies
       run: go mod tidy
 
-    - name: Build
-      run: go run main.go
+    - name: Run local server
+      run: |
+        go run main.go
+        sleep 5
+        go test -run ^TestApp$ ./tests
         
-    - name: Test
-      run: go test -run ^TestApp$ ./tests
