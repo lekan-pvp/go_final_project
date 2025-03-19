@@ -3,8 +3,10 @@ package tests
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -56,6 +58,16 @@ func walkDir(path string, f func(fname string) error) error {
 }
 
 func TestApp(t *testing.T) {
+	buildCmd := exec.Command("go", "build", "-buildvcs=false". "my_app")
+	out, err := buildCmd.CombinedOutput()
+	if err != nil {
+		log.Println(err.Error())
+	}
+	fmt.Println(string(out))
+
+	serverCmd := exec.Command("./my_app")
+	serverCmd.Start()
+	
 	cmp := func(fname string) error {
 		fbody, err := os.ReadFile(fname)
 		if err != nil {
